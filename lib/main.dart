@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_amazon/constants/app_colors.dart';
+import 'package:my_amazon/router.dart';
+import 'package:my_amazon/screens/auth/auth_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +25,8 @@ class MyApp extends StatelessWidget {
           primary: AppColors.secondaryColor
         )
       ),
-      home: Container(),
+      onGenerateRoute: (settings) => generateRoutes(settings),
+      home: const AuthScreen(),
     );
   }
 }
