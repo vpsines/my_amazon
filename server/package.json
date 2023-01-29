@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start":"node ./server.js",
+    "start": "node ./server.js",
     "dev": "nodemon ./server.js"
   },
   "keywords": [
@@ -15,6 +15,7 @@
   "author": "vyshnav.sasidharan",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "http": "^0.0.1-security",
     "mongoose": "^6.9.0"
