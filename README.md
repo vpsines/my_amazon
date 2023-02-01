@@ -1,6 +1,6 @@
 # my_amazon
 
-A new Flutter project.
+A clone of Amazon using Flutter.
 
 ## Getting Started
 
