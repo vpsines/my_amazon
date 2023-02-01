@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class User {
   final String id;
   final String name;
@@ -26,7 +28,7 @@ class User {
         type: map['userType'] ?? '');
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
       "_id": id,
       "name": name,
@@ -36,4 +38,6 @@ class User {
       "token": token,
     };
   }
+
+  String toJson() => jsonEncode(toMap());
 }
