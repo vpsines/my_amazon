@@ -7,7 +7,7 @@ import 'package:my_amazon/helpers/utils.dart';
 import 'package:my_amazon/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_amazon/providers/user_provider.dart';
-import 'package:my_amazon/screens/home/home_screen.dart';
+import 'package:my_amazon/widgets/base/bottom_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -73,7 +73,7 @@ class AuthService {
             await prefs.setString(
                 'x-auth-token', jsonDecode(res.body)['token']);
             Navigator.pushNamedAndRemoveUntil(
-                context, HomeScreen.routeName, (route) => false);
+                context, BottomBar.routeName, (route) => false);
           });
     } catch (e) {
       showSnackBar(context, e.toString());
