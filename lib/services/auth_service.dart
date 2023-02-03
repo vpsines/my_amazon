@@ -14,10 +14,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthService {
   // signup user
   void signUp(
-      {required context,
-      required email,
-      required name,
-      required password}) async {
+      {required BuildContext context,
+      required String email,
+      required String name,
+      required String password}) async {
     try {
       User user = User(
           id: '',
@@ -47,7 +47,10 @@ class AuthService {
   }
 
   // signin user
-  void signIn({required context, required email, required password}) async {
+  void signIn(
+      {required BuildContext context,
+      required String email,
+      required String password}) async {
     try {
       User user = User(
           id: '',
@@ -69,11 +72,11 @@ class AuthService {
           context: context,
           onSuccess: () async {
             SharedPreferences prefs = await SharedPreferences.getInstance();
-            Provider.of<UserProvider>(context, listen: false).setUser(res.body);
-            await prefs.setString(
-                'x-auth-token', jsonDecode(res.body)['token']);
             Navigator.pushNamedAndRemoveUntil(
                 context, BottomBar.routeName, (route) => false);
+            await prefs.setString(
+                'x-auth-token', jsonDecode(res.body)['token']);
+            Provider.of<UserProvider>(context, listen: false).setUser(res.body);
           });
     } catch (e) {
       showSnackBar(context, e.toString());
@@ -83,36 +86,34 @@ class AuthService {
   // get user data
   void getUserData({required context}) async {
     try {
-
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('x-auth-token');
 
-      if(token == null){
+      if (token == null) {
         prefs.setString('x-auth-token', '');
       }
-      
-      var tokenRes = await http.post(Uri.parse(AppConstants.baseUrl + AppConstants.validateToken),
-        headers: <String,String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'x-auth-token':token!
-        }
-      );
+
+      var tokenRes = await http.post(
+          Uri.parse(AppConstants.baseUrl + AppConstants.validateToken),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'x-auth-token': token!
+          });
 
       var response = jsonDecode(tokenRes.body);
 
-      if(response){
+      if (response) {
         // get user data
-        var userResponse = await http.get(Uri.parse(AppConstants.baseUrl + AppConstants.getUser),
-        headers: <String,String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'x-auth-token':token
-          }
-      );
+        var userResponse = await http.get(
+            Uri.parse(AppConstants.baseUrl + AppConstants.getUser),
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+              'x-auth-token': token
+            });
 
-      var userProvider = Provider.of<UserProvider>(context,listen: false);
-      userProvider.setUser(userResponse.body);
+        var userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.setUser(userResponse.body);
       }
-    
     } catch (e) {
       showSnackBar(context, e.toString());
     }
