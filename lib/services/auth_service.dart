@@ -25,7 +25,8 @@ class AuthService {
           email: email,
           password: password,
           token: '',
-          type: '');
+          type: '',
+          cart: []);
 
       http.Response res = await http.post(
           Uri.parse(AppConstants.baseUrl + AppConstants.signUp),
@@ -58,7 +59,8 @@ class AuthService {
           email: email,
           password: password,
           token: '',
-          type: '');
+          type: '',
+          cart: []);
 
       http.Response res = await http.post(
           Uri.parse(AppConstants.baseUrl + AppConstants.signIn),
