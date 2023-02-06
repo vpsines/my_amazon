@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:my_amazon/models/rating.dart';
+
 class Product {
   final String name;
   final String description;
@@ -8,6 +10,7 @@ class Product {
   final String category;
   final double price;
   final String? id;
+  final List<Rating>? ratings;
 
   Product(
       {required this.name,
@@ -16,7 +19,8 @@ class Product {
       required this.images,
       required this.category,
       required this.price,
-      this.id});
+      this.id,
+      this.ratings});
 
   factory Product.fromJson(Map<String, dynamic> map) {
     return Product(
@@ -27,6 +31,7 @@ class Product {
       price: map['price'].toDouble() ?? 0,
       images: List<String>.from(map['images']),
       category: map['category'] ?? '',
+      ratings: map['ratings'] != null ? List<Rating>.from(map['ratings']?.map((e)=> Rating.fromMap(e))):null
     );
   }
 
