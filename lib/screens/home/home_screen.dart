@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_amazon/configs/themes/ui_parameters.dart';
 import 'package:my_amazon/providers/user_provider.dart';
+import 'package:my_amazon/screens/search/search_screen.dart';
 import 'package:my_amazon/widgets/home/address_box.dart';
 import 'package:my_amazon/widgets/home/carousel_image.dart';
 import 'package:my_amazon/widgets/home/deal_of_day.dart';
@@ -17,6 +18,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  void navigateToSearchScreen(String query){
+    Navigator.pushNamed(context, SearchScreen.routeName,arguments: query);
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;
@@ -39,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       elevation: 1,
                       borderRadius: BorderRadius.circular(7),
                       child: TextFormField(
+                        onFieldSubmitted: navigateToSearchScreen,
                         decoration: InputDecoration(
                             prefixIcon: InkWell(
                               onTap: () {},
