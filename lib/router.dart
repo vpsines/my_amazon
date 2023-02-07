@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_amazon/models/product.dart';
+import 'package:my_amazon/screens/address/address_screen.dart';
 import 'package:my_amazon/screens/admin/add_product_screen.dart';
 import 'package:my_amazon/screens/auth/auth_screen.dart';
 import 'package:my_amazon/screens/cart/cart_screen.dart';
@@ -45,9 +46,16 @@ Route<dynamic> generateRoutes(RouteSettings routeSettings) {
                 product: product,
               ));
     case CartScreen.routeName:
-      var product = routeSettings.arguments as Product;
       return MaterialPageRoute(
-          settings: routeSettings, builder: (_) => CartScreen());
+          settings: routeSettings, builder: (_) => const CartScreen());
+    case AddressScreen.routeName:
+      var totalAmount = routeSettings.arguments as String;
+
+      return MaterialPageRoute(
+          settings: routeSettings,
+          builder: (_) => AddressScreen(
+                totalAmount: totalAmount,
+              ));
     default:
       return MaterialPageRoute(
           settings: routeSettings,
