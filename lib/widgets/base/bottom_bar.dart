@@ -2,6 +2,8 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:my_amazon/constants/app_colors.dart';
 import 'package:my_amazon/providers/user_provider.dart';
+import 'package:my_amazon/screens/account/account_screen.dart';
+import 'package:my_amazon/screens/cart/cart_screen.dart';
 import 'package:my_amazon/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -20,12 +22,8 @@ class _BottomBarState extends State<BottomBar> {
 
   List<Widget> pages = [
     const HomeScreen(),
-    const Center(
-      child: Text("Account"),
-    ),
-    const Center(
-      child: Text("Cart"),
-    ),
+    const AccountScreen(),
+    const CartScreen(),
   ];
 
   void updatePage(int page) {
