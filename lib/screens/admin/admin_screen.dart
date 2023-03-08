@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_amazon/configs/themes/ui_parameters.dart';
 import 'package:my_amazon/constants/app_colors.dart';
+import 'package:my_amazon/screens/admin/analytics_screen.dart';
+import 'package:my_amazon/screens/admin/orders_screen.dart';
+import 'package:my_amazon/screens/admin/post_screen.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
@@ -10,20 +13,14 @@ class AdminScreen extends StatefulWidget {
 }
 
 class _AdminScreenState extends State<AdminScreen> {
-
-    int _page = 0;
+  int _page = 0;
   double bottomBarWidth = 42;
   double bottomBarBorderWidth = 5;
 
   List<Widget> pages = [
-    const Center(
-      child: Text("Posts"),
-    ),    const Center(
-      child: Text("Analytics"),
-    ),
-    const Center(
-      child: Text("Cart"),
-    ),
+    const PostScreen(),
+    const AnalyticsScreen(),
+    const OrdersScreen(),
   ];
 
   void updatePage(int page) {
@@ -31,38 +28,38 @@ class _AdminScreenState extends State<AdminScreen> {
       _page = page;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(50),
-            child: AppBar(
-              flexibleSpace: Container(
-                decoration: const BoxDecoration(
-                  gradient: UiParameters.appBarGradient)
-                ),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      alignment: Alignment.topLeft,
-                      child: Image.asset("assets/images/amazon_in.png",
-                      width: 120,
-                      height: 45,
-                      color: Colors.black,),
-                    ),
-                    const Text(
-                      'Admin',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black
-                      ),
-                    ),
-                  ],
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50),
+        child: AppBar(
+          flexibleSpace: Container(
+              decoration:
+                  const BoxDecoration(gradient: UiParameters.appBarGradient)),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                alignment: Alignment.topLeft,
+                child: Image.asset(
+                  "assets/images/amazon_in.png",
+                  width: 120,
+                  height: 45,
+                  color: Colors.black,
                 ),
               ),
-            ),
-                  body: pages[_page],
+              const Text(
+                'Admin',
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              ),
+            ],
+          ),
+        ),
+      ),
+      body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
         onTap: updatePage,
         currentIndex: _page,
